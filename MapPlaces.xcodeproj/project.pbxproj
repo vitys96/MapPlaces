@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0C797679B6D03A85C10D5D /* Pods_MapPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */; };
 		EF98578E23B3C90300D99986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578D23B3C90300D99986 /* AppDelegate.swift */; };
 		EF98579023B3C90300D99986 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578F23B3C90300D99986 /* SceneDelegate.swift */; };
 		EF98579223B3C90300D99986 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98579123B3C90300D99986 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6FC4E8C19A96964EC6C69FAD /* Pods-MapPlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapPlaces.debug.xcconfig"; path = "Target Support Files/Pods-MapPlaces/Pods-MapPlaces.debug.xcconfig"; sourceTree = "<group>"; };
+		D74E8F0F68A627CE89663409 /* Pods-MapPlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapPlaces.release.xcconfig"; path = "Target Support Files/Pods-MapPlaces/Pods-MapPlaces.release.xcconfig"; sourceTree = "<group>"; };
 		EF98578A23B3C90300D99986 /* MapPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF98578D23B3C90300D99986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF98578F23B3C90300D99986 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		EF98579623B3C90400D99986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF98579923B3C90400D99986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF98579B23B3C90400D99986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E0C797679B6D03A85C10D5D /* Pods_MapPlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA09FF35797BDE012F2E94CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6FC4E8C19A96964EC6C69FAD /* Pods-MapPlaces.debug.xcconfig */,
+				D74E8F0F68A627CE89663409 /* Pods-MapPlaces.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		EF98578123B3C90300D99986 = {
 			isa = PBXGroup;
 			children = (
 				EF98578C23B3C90300D99986 /* MapPlaces */,
 				EF98578B23B3C90300D99986 /* Products */,
+				CA09FF35797BDE012F2E94CE /* Pods */,
+				FAB342AA972B575E553D4CD0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = MapPlaces;
 			sourceTree = "<group>";
 		};
+		FAB342AA972B575E553D4CD0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF98579E23B3C90400D99986 /* Build configuration list for PBXNativeTarget "MapPlaces" */;
 			buildPhases = (
+				0097AE3BCF87A74626A411EE /* [CP] Check Pods Manifest.lock */,
 				EF98578623B3C90300D99986 /* Sources */,
 				EF98578723B3C90300D99986 /* Frameworks */,
 				EF98578823B3C90300D99986 /* Resources */,
+				21985C9EE79436A3FC5B2F01 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0097AE3BCF87A74626A411EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MapPlaces-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		21985C9EE79436A3FC5B2F01 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapPlaces/Pods-MapPlaces-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapPlaces/Pods-MapPlaces-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapPlaces/Pods-MapPlaces-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EF98578623B3C90300D99986 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		EF98579F23B3C90400D99986 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FC4E8C19A96964EC6C69FAD /* Pods-MapPlaces.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +370,7 @@
 		};
 		EF9857A023B3C90400D99986 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D74E8F0F68A627CE89663409 /* Pods-MapPlaces.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
