@@ -1,5 +1,28 @@
 PODS:
   - Alamofire (4.9.1)
+  - CHIPageControl (0.2):
+    - CHIPageControl/Aji (= 0.2)
+    - CHIPageControl/Aleppo (= 0.2)
+    - CHIPageControl/Chimayo (= 0.2)
+    - CHIPageControl/Fresno (= 0.2)
+    - CHIPageControl/Jalapeno (= 0.2)
+    - CHIPageControl/Jaloro (= 0.2)
+    - CHIPageControl/Paprika (= 0.2)
+    - CHIPageControl/Puya (= 0.2)
+  - CHIPageControl/Aji (0.2)
+  - CHIPageControl/Aleppo (0.2)
+  - CHIPageControl/Chimayo (0.2)
+  - CHIPageControl/Fresno (0.2)
+  - CHIPageControl/Jalapeno (0.2)
+  - CHIPageControl/Jaloro (0.2)
+  - CHIPageControl/Paprika (0.2)
+  - CHIPageControl/Puya (0.2)
+  - CollectionKit (2.4.0):
+    - CollectionKit/Core (= 2.4.0)
+  - CollectionKit/Core (2.4.0)
+  - CollectionKit/WobbleAnimator (2.4.0):
+    - CollectionKit/Core
+    - YetAnotherAnimationLibrary (~> 1.4.0)
   - IQKeyboardManagerSwift (6.5.4)
   - JGProgressHUD (2.1)
   - lottie-ios (3.1.5)
@@ -23,9 +46,13 @@ PODS:
   - SDWebImage/Core (5.3.2)
   - SPAlert (2.0.26)
   - TableKit (2.10.0)
+  - YetAnotherAnimationLibrary (1.4.0)
 
 DEPENDENCIES:
   - Alamofire
+  - CHIPageControl
+  - CollectionKit (from `https://github.com/Banck/CollectionKit`)
+  - CollectionKit/WobbleAnimator (from `https://github.com/Banck/CollectionKit`)
   - IQKeyboardManagerSwift
   - JGProgressHUD
   - lottie-ios
@@ -40,6 +67,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CHIPageControl
     - IQKeyboardManagerSwift
     - JGProgressHUD
     - lottie-ios
@@ -48,18 +76,26 @@ SPEC REPOS:
     - SDWebImage
     - SPAlert
     - TableKit
+    - YetAnotherAnimationLibrary
 
 EXTERNAL SOURCES:
+  CollectionKit:
+    :git: https://github.com/Banck/CollectionKit
   Motion:
     :git: https://github.com/CosmicMind/Motion
 
 CHECKOUT OPTIONS:
+  CollectionKit:
+    :commit: 51a2036af33606ff4037d42767b231c2b3944b2e
+    :git: https://github.com/Banck/CollectionKit
   Motion:
     :commit: 808ac0cf1b67c5e4163ee867dd6c056836fcbc58
     :git: https://github.com/CosmicMind/Motion
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  CHIPageControl: a787bf7205c9b7e7fbfc412be36c5e8636b68f86
+  CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
@@ -69,7 +105,8 @@ SPEC CHECKSUMS:
   SDWebImage: 6ac2eb96571bff96ecde31a987172c5934a0eb7d
   SPAlert: 59689d38d4cb6f6c144b238ada1fae04446a4091
   TableKit: 65645d0dd786e21dc61464da59ad770c60a07282
+  YetAnotherAnimationLibrary: 7f808b10c2d193dd3e82407e722fa60aa0bdff2d
 
-PODFILE CHECKSUM: 3b5ddc098abb305c219c8c1ccef26ffd732cca9f
+PODFILE CHECKSUM: 58d2a11dd1e65f3d8457005dc2ac99447058fa69
 
 COCOAPODS: 1.8.4

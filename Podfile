@@ -6,7 +6,10 @@ target 'MapPlaces' do
   use_frameworks!
 
   # Pods for MapPlaces
-pod 'SDWebImage'
+  pod 'CollectionKit', :git=> 'https://github.com/Banck/CollectionKit'
+  pod 'CollectionKit/WobbleAnimator', :git=> 'https://github.com/Banck/CollectionKit'
+  pod 'CHIPageControl'
+  pod 'SDWebImage'
   pod 'JGProgressHUD'
   pod 'PromiseKit'
   pod 'Motion', :git=> 'https://github.com/CosmicMind/Motion'
