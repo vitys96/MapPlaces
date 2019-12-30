@@ -18,14 +18,15 @@ class MapScreenViewController: UIViewController {
     var mapView = MKMapView()
     var searchTextField = SearchTextField()
     let collectionView = CollectionView()
-    private var timer: Timer?
     private var startingScrollingOffset = CGPoint.zero
+    private let locationManager = CLLocationManager()
     
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         setupRegionForMap()
+        userLocation()
         presenter?.viewDidLoad()
     }
 }
@@ -57,6 +58,7 @@ extension MapScreenViewController {
     }
     private func configureMapView() {
         mapView.delegate = self
+        mapView.showsUserLocation = true
         view.addSubview(mapView)
         mapView.fillSuperview()
     }
@@ -77,6 +79,8 @@ extension MapScreenViewController {
         collectionView.delaysContentTouches = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
+        collectionView.clipsToBounds = false
+        collectionView.backgroundColor = .clear
     }
     
     private func setupRegionForMap() {
@@ -86,6 +90,11 @@ extension MapScreenViewController {
         mapView.setRegion(region, animated: true)
     }
     
+    private func userLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     @objc private func performLocalSearch() {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchTextField.text
@@ -93,7 +102,6 @@ extension MapScreenViewController {
         
         let localSearch = MKLocalSearch(request: request)
         localSearch.start { (resp, err) in
-            
             if let err = err {
                 print("Failed local search:", err)
                 return
@@ -101,7 +109,6 @@ extension MapScreenViewController {
             self.mapView.removeAnnotations(self.mapView.annotations)
             var arrayOfMapItems: [MKMapItem] = []
             resp?.mapItems.forEach({ (mapItem) in
-                print (mapItem.address())
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = mapItem.placemark.coordinate
                 annotation.title = mapItem.name
@@ -114,6 +121,25 @@ extension MapScreenViewController {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
+extension MapScreenViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            print ("dqwwqd")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let firstLoc = locations.first else { return }
+        mapView.setRegion(MKCoordinateRegion(center: firstLoc.coordinate, span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: false)
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+// MARK: - UITextFieldDelegate
 extension MapScreenViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -122,16 +148,21 @@ extension MapScreenViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - MKMapViewDelegate
 extension MapScreenViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
-        annotationView.canShowCallout = true
-        //        annotationView.image = #imageLiteral(resourceName: "tourist")
-        return annotationView
+        if annotation is MKPointAnnotation {
+            let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
+            annotationView.canShowCallout = true
+            //        annotationView.image = #imageLiteral(resourceName: "tourist")
+            return annotationView
+        }
+        return nil
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension MapScreenViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         startingScrollingOffset = scrollView.contentOffset
@@ -139,20 +170,20 @@ extension MapScreenViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let cellWidth = collectionView.frame.width - CGFloat(60).dp //collectionSize.width
         let page: CGFloat
-        let offset = scrollView.contentOffset.x // 2
+        let offset = scrollView.contentOffset.x
         let proposedPage = offset / max(1, cellWidth)
         let snapPoint: CGFloat = 0.1
         let snapDelta: CGFloat = offset > startingScrollingOffset.x ? (1 - snapPoint) : snapPoint
         
-        if floor(proposedPage + snapDelta) == floor(proposedPage) { // 3
-            page = floor(proposedPage) // 4
+        if floor(proposedPage + snapDelta) == floor(proposedPage) {
+            page = floor(proposedPage)
         }
         else {
-            page = floor(proposedPage + 1) // 5
+            page = floor(proposedPage + 1)
         }
         
         targetContentOffset.pointee = CGPoint(
-            x: cellWidth * page - 40, //spacing + inset
+            x: cellWidth * page - 24, //spacing + inset
             y: targetContentOffset.pointee.y
         )
     }

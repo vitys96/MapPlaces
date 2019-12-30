@@ -24,27 +24,18 @@ class MapScreenPresenter {
         self.interactor = interactor
         self.router = router
     }
-//    func viewDidLoad() {
-//        let items: [PlacesCell.Data] = [
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj"),
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj"),
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj"),
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj"),
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj"),
-//            PlacesCell.Data(placeName: "xixidid", placeAddress: "dbdndh", placeCoordinates: "cjdjdj")
-//        ]
-//        self.view?.displayCollectionData(data: items)
-//    }
 
 }
 
 // MARK: - MapScreenPresenterInterface -
 extension MapScreenPresenter: MapScreenPresenterInterface {
     func mappingValues(items: [MKMapItem]) {
-        let lala = items.map {
-            PlacesCell.Data(placeName: $0.name, placeAddress: $0.address(), placeCoordinates: nil)
+        let collectionData = items.map { place -> PlacesCell.Data in
+//            let lat = place.placemark.coordinate.latitude
+//            let long = place.placemark.coordinate.longitude
+            return PlacesCell.Data(placeName: place.name, placeAddress: place.address(), placeCoordinates: place.coordinates())
         }
-        self.view?.displayCollectionData(data: lala)
+        self.view?.displayCollectionData(data: collectionData)
     }
 }
 

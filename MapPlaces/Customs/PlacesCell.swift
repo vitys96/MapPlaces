@@ -13,6 +13,7 @@ class PlacesCell: UIView {
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var placeAddress: UILabel!
     @IBOutlet weak var placeCoordinates: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         fromNib()
@@ -25,6 +26,8 @@ class PlacesCell: UIView {
     }
     
     func configureUI() {
+        placeName.numberOfLines = 0
+        placeAddress.numberOfLines = 0
     }
     
     func configure(with data: Data) {

@@ -17,6 +17,8 @@
 		EF6655CD23B7943600A1F96D /* CollectionInsideProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6655C923B7943600A1F96D /* CollectionInsideProvider.swift */; };
 		EF6655CE23B7943600A1F96D /* AnimatedReloadAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6655CA23B7943600A1F96D /* AnimatedReloadAnimator.swift */; };
 		EF6655D023B799A300A1F96D /* MKMapItem+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6655CF23B799A300A1F96D /* MKMapItem+Address.swift */; };
+		EF6655D223B906F700A1F96D /* Extension + CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6655D123B906F700A1F96D /* Extension + CALayer.swift */; };
+		EF6655D423B909CA00A1F96D /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6655D323B909CA00A1F96D /* Extension + UIColor.swift */; };
 		EF75CBA523B64C1E0070AEA3 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CB9A23B64C1E0070AEA3 /* Extension + UIButton.swift */; };
 		EF75CBA623B64C1E0070AEA3 /* Extension + GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CB9B23B64C1E0070AEA3 /* Extension + GCD.swift */; };
 		EF75CBA723B64C1E0070AEA3 /* Extension + CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CB9C23B64C1E0070AEA3 /* Extension + CMTime.swift */; };
@@ -53,6 +55,8 @@
 		EF6655C923B7943600A1F96D /* CollectionInsideProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionInsideProvider.swift; sourceTree = "<group>"; };
 		EF6655CA23B7943600A1F96D /* AnimatedReloadAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedReloadAnimator.swift; sourceTree = "<group>"; };
 		EF6655CF23B799A300A1F96D /* MKMapItem+Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapItem+Address.swift"; sourceTree = "<group>"; };
+		EF6655D123B906F700A1F96D /* Extension + CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CALayer.swift"; sourceTree = "<group>"; };
+		EF6655D323B909CA00A1F96D /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
 		EF75CB9A23B64C1E0070AEA3 /* Extension + UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 		EF75CB9B23B64C1E0070AEA3 /* Extension + GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + GCD.swift"; sourceTree = "<group>"; };
 		EF75CB9C23B64C1E0070AEA3 /* Extension + CMTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + CMTime.swift"; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				EF75CBA323B64C1E0070AEA3 /* Extension + UIView.swift */,
 				EF75CBA423B64C1E0070AEA3 /* UIView + Anchors.swift */,
 				EF6655CF23B799A300A1F96D /* MKMapItem+Address.swift */,
+				EF6655D123B906F700A1F96D /* Extension + CALayer.swift */,
+				EF6655D323B909CA00A1F96D /* Extension + UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -347,6 +353,8 @@
 				EF75CBAD23B64C1E0070AEA3 /* UIViewController + Storyboard.swift in Sources */,
 				EF6655C323B761A900A1F96D /* PlacesCell.swift in Sources */,
 				EF6655C123B7617900A1F96D /* PlacesProvider.swift in Sources */,
+				EF6655D423B909CA00A1F96D /* Extension + UIColor.swift in Sources */,
+				EF6655D223B906F700A1F96D /* Extension + CALayer.swift in Sources */,
 				EF75CBA623B64C1E0070AEA3 /* Extension + GCD.swift in Sources */,
 				EF98578E23B3C90300D99986 /* AppDelegate.swift in Sources */,
 				EF75CBBF23B64DB00070AEA3 /* MapScreenInteractor.swift in Sources */,
