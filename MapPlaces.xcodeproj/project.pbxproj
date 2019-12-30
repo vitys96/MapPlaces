@@ -37,6 +37,7 @@
 		EF75CBBE23B64DB00070AEA3 /* MapScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CBB723B64DB00070AEA3 /* MapScreenProtocols.swift */; };
 		EF75CBBF23B64DB00070AEA3 /* MapScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CBB823B64DB00070AEA3 /* MapScreenInteractor.swift */; };
 		EF75CBC023B64DB00070AEA3 /* MapScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CBB923B64DB00070AEA3 /* MapScreenConfigurator.swift */; };
+		EF7ADC3523BA38CC00A43F72 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */; };
 		EF98578E23B3C90300D99986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578D23B3C90300D99986 /* AppDelegate.swift */; };
 		EF98579023B3C90300D99986 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578F23B3C90300D99986 /* SceneDelegate.swift */; };
 		EF98579723B3C90400D99986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF98579623B3C90400D99986 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		EF75CBB723B64DB00070AEA3 /* MapScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenProtocols.swift; sourceTree = "<group>"; };
 		EF75CBB823B64DB00070AEA3 /* MapScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenInteractor.swift; sourceTree = "<group>"; };
 		EF75CBB923B64DB00070AEA3 /* MapScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenConfigurator.swift; sourceTree = "<group>"; };
+		EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 		EF98578A23B3C90300D99986 /* MapPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF98578D23B3C90300D99986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF98578F23B3C90300D99986 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,9 +119,9 @@
 		EF6655BF23B7615600A1F96D /* Customs */ = {
 			isa = PBXGroup;
 			children = (
-				EF6655C023B7617900A1F96D /* PlacesProvider.swift */,
-				EF6655C223B761A900A1F96D /* PlacesCell.swift */,
-				EF6655C423B761BD00A1F96D /* PlacesCell.xib */,
+				EF7ADC3323BA38AD00A43F72 /* MapAnnotation */,
+				EF7ADC3123BA388E00A43F72 /* Providers */,
+				EF7ADC3223BA389B00A43F72 /* PlacesCell */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -185,6 +187,31 @@
 				EF75CBC123B64DD00070AEA3 /* Map */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		EF7ADC3123BA388E00A43F72 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				EF6655C023B7617900A1F96D /* PlacesProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		EF7ADC3223BA389B00A43F72 /* PlacesCell */ = {
+			isa = PBXGroup;
+			children = (
+				EF6655C223B761A900A1F96D /* PlacesCell.swift */,
+				EF6655C423B761BD00A1F96D /* PlacesCell.xib */,
+			);
+			path = PlacesCell;
+			sourceTree = "<group>";
+		};
+		EF7ADC3323BA38AD00A43F72 /* MapAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */,
+			);
+			path = MapAnnotation;
 			sourceTree = "<group>";
 		};
 		EF98578123B3C90300D99986 = {
@@ -366,6 +393,7 @@
 				EF6655CB23B7943600A1F96D /* CollectionCell.swift in Sources */,
 				EF6655D023B799A300A1F96D /* MKMapItem+Address.swift in Sources */,
 				EF6655CD23B7943600A1F96D /* CollectionInsideProvider.swift in Sources */,
+				EF7ADC3523BA38CC00A43F72 /* DroppablePin.swift in Sources */,
 				EF75CBA823B64C1E0070AEA3 /* Extension + CGFloat.swift in Sources */,
 				EF75CBA523B64C1E0070AEA3 /* Extension + UIButton.swift in Sources */,
 				EF3807FF23B739220000EBD6 /* SearchTextField.swift in Sources */,

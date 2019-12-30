@@ -20,13 +20,15 @@ class MapScreenViewController: UIViewController {
     let collectionView = CollectionView()
     private var startingScrollingOffset = CGPoint.zero
     private let locationManager = CLLocationManager()
+    private var collectionData: [PlacesCell.Data] = []
+    private let authorizationStatus = CLLocationManager.authorizationStatus()
+    private let regionRadius: Double = 1000
     
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        setupRegionForMap()
-        userLocation()
+        configureLocationServices()
         presenter?.viewDidLoad()
     }
 }
@@ -35,6 +37,7 @@ class MapScreenViewController: UIViewController {
 // MARK: - MapScreenView
 extension MapScreenViewController: MapScreenView {
     func displayCollectionData(data: [PlacesCell.Data]) {
+        collectionData = data
         collectionView.setContentOffset(.zero, animated: false)
         let provider = PlacesProvider(ArrayDataSource(data: data), tapHandler: { [weak self] context in
             guard let self = self else { return }
@@ -59,6 +62,9 @@ extension MapScreenViewController {
     private func configureMapView() {
         mapView.delegate = self
         mapView.showsUserLocation = true
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        addDroppablePin()
         view.addSubview(mapView)
         mapView.fillSuperview()
     }
@@ -83,16 +89,33 @@ extension MapScreenViewController {
         collectionView.backgroundColor = .clear
     }
     
-    private func setupRegionForMap() {
-        let centerCoordinate = CLLocationCoordinate2D(latitude: 37.7666, longitude: -122.427290)
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: centerCoordinate, span: span)
-        mapView.setRegion(region, animated: true)
+    private func addDroppablePin() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dropPin))
+        tap.numberOfTapsRequired = 1
+        mapView.addGestureRecognizer(tap)
     }
     
-    private func userLocation() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+    private func removePins() {
+        for annotation in mapView.annotations {
+            if annotation is DroppablePin {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+    }
+    
+    private func configGestures(isEnabled: Bool) {
+        mapView.gestureRecognizers?.first?.isEnabled = isEnabled
+    }
+    
+    @objc func dropPin(sender: UITapGestureRecognizer) {
+        removePins()
+        let touchPoint = sender.location(in: mapView)
+        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        
+        let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
+        mapView.addAnnotation(annotation)
+        let coordinateRegion = MKCoordinateRegion(center: touchCoordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     @objc private func performLocalSearch() {
@@ -124,19 +147,18 @@ extension MapScreenViewController {
 // MARK: - CLLocationManagerDelegate
 extension MapScreenViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-        default:
-            print ("dqwwqd")
+        guard let coordinate = locationManager.location?.coordinate else { return }
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    func configureLocationServices() {
+        if authorizationStatus == .notDetermined {
+            locationManager.requestAlwaysAuthorization()
+        } else {
+            return
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let firstLoc = locations.first else { return }
-        mapView.setRegion(MKCoordinateRegion(center: firstLoc.coordinate, span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: false)
-        locationManager.stopUpdatingLocation()
-    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -144,6 +166,7 @@ extension MapScreenViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.performLocalSearch()
+        self.configGestures(isEnabled: false)
         return true
     }
 }
@@ -155,10 +178,30 @@ extension MapScreenViewController: MKMapViewDelegate {
         if annotation is MKPointAnnotation {
             let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
             annotationView.canShowCallout = true
-            //        annotationView.image = #imageLiteral(resourceName: "tourist")
+            let btn = UIButton(type: .detailDisclosure)
+            annotationView.rightCalloutAccessoryView = btn
             return annotationView
         }
+        if annotation is DroppablePin {
+            let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
+            pinAnnotation.pinTintColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
+            pinAnnotation.animatesDrop = true
+            return pinAnnotation
+        }
         return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard
+            let index = collectionData.firstIndex(where: {$0.placeName == view.annotation?.title}),
+            let coord = view.annotation?.coordinate
+        else { return }
+        
+        let coordinateRegion = MKCoordinateRegion(center: coord, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+        if collectionData.count != 1 {
+            self.collectionView.scroll(to: index, animated: true)
+        }
     }
 }
 
@@ -168,7 +211,7 @@ extension MapScreenViewController: UIScrollViewDelegate {
         startingScrollingOffset = scrollView.contentOffset
     }
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let cellWidth = collectionView.frame.width - CGFloat(60).dp //collectionSize.width
+        let cellWidth = collectionView.frame.width - CGFloat(64).dp //collectionSize.width
         let page: CGFloat
         let offset = scrollView.contentOffset.x
         let proposedPage = offset / max(1, cellWidth)
@@ -188,3 +231,4 @@ extension MapScreenViewController: UIScrollViewDelegate {
         )
     }
 }
+
