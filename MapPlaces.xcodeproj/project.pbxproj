@@ -38,10 +38,13 @@
 		EF75CBBF23B64DB00070AEA3 /* MapScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CBB823B64DB00070AEA3 /* MapScreenInteractor.swift */; };
 		EF75CBC023B64DB00070AEA3 /* MapScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75CBB923B64DB00070AEA3 /* MapScreenConfigurator.swift */; };
 		EF7ADC3523BA38CC00A43F72 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */; };
+		EF85EEC823BF8D7F00F120E0 /* ConvertCoordToPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85EEC723BF8D7F00F120E0 /* ConvertCoordToPlacemark.swift */; };
 		EF98578E23B3C90300D99986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578D23B3C90300D99986 /* AppDelegate.swift */; };
 		EF98579023B3C90300D99986 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98578F23B3C90300D99986 /* SceneDelegate.swift */; };
 		EF98579723B3C90400D99986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF98579623B3C90400D99986 /* Assets.xcassets */; };
 		EF98579A23B3C90400D99986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF98579823B3C90400D99986 /* LaunchScreen.storyboard */; };
+		EFA0C20423BB997400B62E73 /* PlacePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20323BB997400B62E73 /* PlacePin.swift */; };
+		EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20523BBA49300B62E73 /* TapticEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,12 +80,15 @@
 		EF75CBB823B64DB00070AEA3 /* MapScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenInteractor.swift; sourceTree = "<group>"; };
 		EF75CBB923B64DB00070AEA3 /* MapScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenConfigurator.swift; sourceTree = "<group>"; };
 		EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
+		EF85EEC723BF8D7F00F120E0 /* ConvertCoordToPlacemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertCoordToPlacemark.swift; sourceTree = "<group>"; };
 		EF98578A23B3C90300D99986 /* MapPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF98578D23B3C90300D99986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF98578F23B3C90300D99986 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EF98579623B3C90400D99986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF98579923B3C90400D99986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF98579B23B3C90400D99986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFA0C20323BB997400B62E73 /* PlacePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePin.swift; sourceTree = "<group>"; };
+		EFA0C20523BBA49300B62E73 /* TapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapticEngine.swift; sourceTree = "<group>"; };
 		F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +118,8 @@
 			children = (
 				EF6655C623B7943600A1F96D /* CollectionKit */,
 				EF3807FE23B739220000EBD6 /* SearchTextField.swift */,
+				EFA0C20523BBA49300B62E73 /* TapticEngine.swift */,
+				EF85EEC723BF8D7F00F120E0 /* ConvertCoordToPlacemark.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				EF7ADC3423BA38CB00A43F72 /* DroppablePin.swift */,
+				EFA0C20323BB997400B62E73 /* PlacePin.swift */,
 			);
 			path = MapAnnotation;
 			sourceTree = "<group>";
@@ -374,11 +383,13 @@
 				EF6655CE23B7943600A1F96D /* AnimatedReloadAnimator.swift in Sources */,
 				EF75CBA723B64C1E0070AEA3 /* Extension + CMTime.swift in Sources */,
 				EF75CBAE23B64C1E0070AEA3 /* Extension + UIView.swift in Sources */,
+				EF85EEC823BF8D7F00F120E0 /* ConvertCoordToPlacemark.swift in Sources */,
 				EF75CBBC23B64DB00070AEA3 /* MapScreenRouter.swift in Sources */,
 				EF6655CC23B7943600A1F96D /* CollectionInsidable.swift in Sources */,
 				EF75CBA923B64C1E0070AEA3 /* Extension + Nib.swift in Sources */,
 				EF75CBAD23B64C1E0070AEA3 /* UIViewController + Storyboard.swift in Sources */,
 				EF6655C323B761A900A1F96D /* PlacesCell.swift in Sources */,
+				EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */,
 				EF6655C123B7617900A1F96D /* PlacesProvider.swift in Sources */,
 				EF6655D423B909CA00A1F96D /* Extension + UIColor.swift in Sources */,
 				EF6655D223B906F700A1F96D /* Extension + CALayer.swift in Sources */,
@@ -388,6 +399,7 @@
 				EF75CBAF23B64C1E0070AEA3 /* UIView + Anchors.swift in Sources */,
 				EF75CBBB23B64DB00070AEA3 /* MapScreenPresenter.swift in Sources */,
 				EF98579023B3C90300D99986 /* SceneDelegate.swift in Sources */,
+				EFA0C20423BB997400B62E73 /* PlacePin.swift in Sources */,
 				EF75CBAB23B64C1E0070AEA3 /* Extension + TableDirector.swift in Sources */,
 				EF75CBAA23B64C1E0070AEA3 /* Extension + ViewController.swift in Sources */,
 				EF6655CB23B7943600A1F96D /* CollectionCell.swift in Sources */,

@@ -10,11 +10,13 @@
 //
 
 import UIKit
+import MapKit
 
 class MapScreenInteractor: MapScreenInteractorInput {
+    
+    
     // MARK: - Properties
     weak var presenter: MapScreenInteractorOutput?
     
     // MARK: - MapScreenInteractorInput -
-
 }

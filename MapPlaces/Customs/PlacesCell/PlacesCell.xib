@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlacesCell" customModule="MapPlaces" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="sMa-B5-87G"/>
                 <outlet property="placeAddress" destination="Szl-oi-EQO" id="6yo-O0-LJu"/>
                 <outlet property="placeCoordinates" destination="0KS-ER-5ur" id="TqR-vi-oKK"/>
                 <outlet property="placeName" destination="sX3-Yr-Prl" id="NBu-TU-OEY"/>

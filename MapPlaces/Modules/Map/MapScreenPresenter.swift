@@ -29,10 +29,10 @@ class MapScreenPresenter {
 
 // MARK: - MapScreenPresenterInterface -
 extension MapScreenPresenter: MapScreenPresenterInterface {
+    
     func mappingValues(items: [MKMapItem]) {
         let collectionData = items.map { place -> PlacesCell.Data in
-//            let lat = place.placemark.coordinate.latitude
-//            let long = place.placemark.coordinate.longitude
+            print (place.coordinates())
             return PlacesCell.Data(placeName: place.name, placeAddress: place.address(), placeCoordinates: place.coordinates())
         }
         self.view?.displayCollectionData(data: collectionData)
@@ -41,6 +41,7 @@ extension MapScreenPresenter: MapScreenPresenterInterface {
 
 // MARK: - MapScreenInteractorOutput -
 extension MapScreenPresenter: MapScreenInteractorOutput {
+    
     
 }
 

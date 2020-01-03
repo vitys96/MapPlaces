@@ -12,6 +12,8 @@ import MapKit
 class DroppablePin: NSObject, MKAnnotation {
     dynamic var coordinate: CLLocationCoordinate2D
     var identifier: String
+    var title: String?
+    var subtitle: String?
     
     init(coordinate: CLLocationCoordinate2D, identifier: String) {
         self.coordinate = coordinate

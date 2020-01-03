@@ -46,7 +46,6 @@ extension MapScreenPresenterInterface {
 
 //MARK: Interactor -
 protocol MapScreenInteractorOutput: class {
-
     /* Interactor -> Presenter */
 }
 

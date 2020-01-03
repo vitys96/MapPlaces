@@ -35,9 +35,9 @@ extension MKMapItem {
     func coordinates() -> String {
         let lat = placemark.coordinate.latitude
         let long = placemark.coordinate.longitude
-        let formattedLat = String(format: "%.7f", lat)
-        let formattedLong = String(format: "%.7f", long)
-        let fullCoordinates = "\(formattedLat) · \(formattedLong)"
+        let formattedLat = String(format: "%.6f", lat)
+        let formattedLong = String(format: "%.6f", long)
+        let fullCoordinates = "\(formattedLat) \(formattedLong)"
         
         return fullCoordinates
     }

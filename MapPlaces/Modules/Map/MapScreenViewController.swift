@@ -28,7 +28,6 @@ class MapScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        configureLocationServices()
         presenter?.viewDidLoad()
     }
 }
@@ -58,12 +57,12 @@ extension MapScreenViewController {
         configureMapView()
         configureSearch()
         configureCollectionView()
+        configureLocationServices()
     }
     private func configureMapView() {
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         addDroppablePin()
         view.addSubview(mapView)
         mapView.fillSuperview()
@@ -89,33 +88,48 @@ extension MapScreenViewController {
         collectionView.backgroundColor = .clear
     }
     
+    // MARK: - LongPressGestureRecognizer
     private func addDroppablePin() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dropPin))
-        tap.numberOfTapsRequired = 1
+        let tap = UILongPressGestureRecognizer(target: self, action: #selector(dropPin))
+        tap.minimumPressDuration = 0.5
+        tap.delaysTouchesBegan = true
         mapView.addGestureRecognizer(tap)
     }
     
     private func removePins() {
-        for annotation in mapView.annotations {
-            if annotation is DroppablePin {
-                mapView.removeAnnotation(annotation)
-            }
-        }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
     }
     
     private func configGestures(isEnabled: Bool) {
         mapView.gestureRecognizers?.first?.isEnabled = isEnabled
     }
     
-    @objc func dropPin(sender: UITapGestureRecognizer) {
-        removePins()
-        let touchPoint = sender.location(in: mapView)
-        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
-        let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
-        mapView.addAnnotation(annotation)
-        let coordinateRegion = MKCoordinateRegion(center: touchCoordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
+    // MARK: - Drop Pin
+    @objc func dropPin(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            TapticEngine.impact.feedback(.heavy)
+            removePins()
+            let touchPoint = sender.location(in: mapView)
+            let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+            let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
+            annotation.coordinate = touchCoordinate
+            ConvertCoordToPlacemark.lookUpCurrentLocation(touchCoordinates: touchCoordinate) { address in
+                annotation.title = address
+                annotation.subtitle = "Посмотреть фото"
+            }
+            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)))
+            source.name = "Source"
+
+            let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)))
+            destination.name = "Destination"
+
+            MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+            self.mapView.addAnnotation(annotation)
+            self.mapView.selectAnnotation(annotation, animated: true)
+            let circle = MKCircle(center: annotation.coordinate, radius: regionRadius)
+            mapView.addOverlay(circle)
+        }
     }
     
     @objc private func performLocalSearch() {
@@ -148,15 +162,20 @@ extension MapScreenViewController {
 extension MapScreenViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard let coordinate = locationManager.location?.coordinate else { return }
-        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius * 2, longitudinalMeters: regionRadius * 2)
         mapView.setRegion(coordinateRegion, animated: true)
     }
-    func configureLocationServices() {
+    private func configureLocationServices() {
         if authorizationStatus == .notDetermined {
             locationManager.requestAlwaysAuthorization()
         } else {
             return
         }
+    }
+    private func beginLocationUpdates(locationManager: CLLocationManager) {
+        mapView.showsUserLocation = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     
 }
@@ -166,7 +185,8 @@ extension MapScreenViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.performLocalSearch()
-        self.configGestures(isEnabled: false)
+        self.removePins()
+        //        self.configGestures(isEnabled: false)
         return true
     }
 }
@@ -175,6 +195,9 @@ extension MapScreenViewController: UITextFieldDelegate {
 extension MapScreenViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
         if annotation is MKPointAnnotation {
             let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
             annotationView.canShowCallout = true
@@ -183,10 +206,14 @@ extension MapScreenViewController: MKMapViewDelegate {
             return annotationView
         }
         if annotation is DroppablePin {
-            let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
-            pinAnnotation.pinTintColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
-            pinAnnotation.animatesDrop = true
-            return pinAnnotation
+            let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
+            annotationView.canShowCallout = true
+            annotationView.pinTintColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
+            let btn = UIButton(type: .detailDisclosure)
+            annotationView.rightCalloutAccessoryView = btn
+            annotationView.animatesDrop = true
+            annotationView.sizeToFit()
+            return annotationView
         }
         return nil
     }
@@ -195,14 +222,22 @@ extension MapScreenViewController: MKMapViewDelegate {
         guard
             let index = collectionData.firstIndex(where: {$0.placeName == view.annotation?.title}),
             let coord = view.annotation?.coordinate
-        else { return }
+            else { return }
         
-        let coordinateRegion = MKCoordinateRegion(center: coord, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegion(center: coord, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
         if collectionData.count != 1 {
             self.collectionView.scroll(to: index, animated: true)
         }
     }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKCircleRenderer(overlay: overlay)
+        renderer.fillColor = UIColor.cyan.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.cyan.withAlphaComponent(0.8)
+        return renderer
+    }
+    
 }
 
 // MARK: - UIScrollViewDelegate
