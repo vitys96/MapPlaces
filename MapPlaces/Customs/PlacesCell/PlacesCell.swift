@@ -68,13 +68,15 @@ extension PlacesCell: UIContextMenuInteractionDelegate {
                 alertView.present()
             }
             
-            let open = UIAction(title: "Открыть в картах", image: UIImage(systemName: "square.and.arrow.up")) {[weak self] (action) in
+            let open = UIAction(title: "Открыть в Яндекс картах", image: UIImage(systemName: "map")) {[weak self] (action) in
                 guard let self = self else { return }
                 let lat = self.placeCoordinates.text
                 if let components = lat?.split(separator: " ") {
                     if let url = URL(string: "yandexmaps://maps.yandex.ru/?pt=\(components[1]),\(components[0])&z=18&l=map") {
-                        UIApplication.shared.open(url)
-                        print (url)
+                        DispatchQueue.main.async {
+                            UIApplication.shared.open(url)
+                        }
+                        
                     }
                 }
             }
