@@ -76,7 +76,6 @@ extension PlacesCell: UIContextMenuInteractionDelegate {
                         UIApplication.shared.open(url)
                         print (url)
                     }
-                    
                 }
             }
             

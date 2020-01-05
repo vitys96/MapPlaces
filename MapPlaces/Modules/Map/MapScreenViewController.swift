@@ -118,13 +118,6 @@ extension MapScreenViewController {
                 annotation.title = address
                 annotation.subtitle = "Посмотреть фото"
             }
-            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)))
-            source.name = "Source"
-
-            let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)))
-            destination.name = "Destination"
-
-            MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
             self.mapView.addAnnotation(annotation)
             self.mapView.selectAnnotation(annotation, animated: true)
             let circle = MKCircle(center: annotation.coordinate, radius: regionRadius)
@@ -198,6 +191,7 @@ extension MapScreenViewController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         }
+//        MKMarkerAnnotationView(annotation: <#T##MKAnnotation?#>, reuseIdentifier: <#T##String?#>)
         if annotation is MKPointAnnotation {
             let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
             annotationView.canShowCallout = true

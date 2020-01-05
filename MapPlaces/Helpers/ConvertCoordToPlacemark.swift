@@ -18,10 +18,18 @@ class ConvertCoordToPlacemark {
                 completionHandler(nil)
                 return
             }
-            let streetName = placeMark.thoroughfare ?? ""
-            let streetNumber = placeMark.subThoroughfare ?? ""
-            
-            let placeDescr = "\(streetName), \(streetNumber)"
+            var placeDescr = String()
+            guard let streetName = placeMark.thoroughfare else {
+                placeDescr = "Неизестно"
+                return
+            }
+                placeDescr.append(streetName)
+                if let streetNumber = placeMark.subThoroughfare {
+                    placeDescr.append(", \(streetNumber)")
+                }
+//
+//
+//            let placeDescr = "\(streetName), \(streetNumber)"
             completionHandler(placeDescr)
         }
     }
