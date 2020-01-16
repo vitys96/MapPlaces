@@ -73,10 +73,9 @@ extension PlacesCell: UIContextMenuInteractionDelegate {
                 let lat = self.placeCoordinates.text
                 if let components = lat?.split(separator: " ") {
                     if let url = URL(string: "yandexmaps://maps.yandex.ru/?pt=\(components[1]),\(components[0])&z=18&l=map") {
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                             UIApplication.shared.open(url)
                         }
-                        
                     }
                 }
             }
