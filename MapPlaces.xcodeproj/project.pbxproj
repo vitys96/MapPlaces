@@ -45,6 +45,7 @@
 		EF98579A23B3C90400D99986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF98579823B3C90400D99986 /* LaunchScreen.storyboard */; };
 		EFA0C20423BB997400B62E73 /* PlacePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20323BB997400B62E73 /* PlacePin.swift */; };
 		EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20523BBA49300B62E73 /* TapticEngine.swift */; };
+		EFC53A6A23D44C3F00CA5B80 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A6923D44C3F00CA5B80 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		EF98579B23B3C90400D99986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFA0C20323BB997400B62E73 /* PlacePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePin.swift; sourceTree = "<group>"; };
 		EFA0C20523BBA49300B62E73 /* TapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapticEngine.swift; sourceTree = "<group>"; };
+		EFC53A6923D44C3F00CA5B80 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 				EF6655CF23B799A300A1F96D /* MKMapItem+Address.swift */,
 				EF6655D123B906F700A1F96D /* Extension + CALayer.swift */,
 				EF6655D323B909CA00A1F96D /* Extension + UIColor.swift */,
+				EFC53A6923D44C3F00CA5B80 /* Utils.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				EF75CBA923B64C1E0070AEA3 /* Extension + Nib.swift in Sources */,
 				EF75CBAD23B64C1E0070AEA3 /* UIViewController + Storyboard.swift in Sources */,
 				EF6655C323B761A900A1F96D /* PlacesCell.swift in Sources */,
+				EFC53A6A23D44C3F00CA5B80 /* Utils.swift in Sources */,
 				EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */,
 				EF6655C123B7617900A1F96D /* PlacesProvider.swift in Sources */,
 				EF6655D423B909CA00A1F96D /* Extension + UIColor.swift in Sources */,

@@ -30,11 +30,12 @@ class SearchTextField: UITextField {
         self.clipsToBounds = true
         self.layer.shadowOpacity = 0.9
         self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        
         //To apply padding
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
         self.leftView = paddingView
         self.leftViewMode = UITextField.ViewMode.always
+        self.clearButtonMode = .whileEditing
+        
     }
     
 }

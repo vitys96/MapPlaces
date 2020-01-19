@@ -23,6 +23,8 @@ class MapScreenViewController: UIViewController {
     private var collectionData: [PlacesCell.Data] = []
     private let authorizationStatus = CLLocationManager.authorizationStatus()
     private let regionRadius: Double = 1000
+    private var collectionViewDataSource = ArrayDataSource<PlacesCell.Data>(data: [])
+    private var placesProvider: PlacesProvider!
     
     // MARK: - Lifecycle -
     override func viewDidLoad() {
@@ -38,16 +40,7 @@ extension MapScreenViewController: MapScreenView {
     func displayCollectionData(data: [PlacesCell.Data]) {
         collectionData = data
         collectionView.setContentOffset(.zero, animated: false)
-        let provider = PlacesProvider(ArrayDataSource(data: data), tapHandler: { [weak self] context in
-            guard let self = self else { return }
-            let annotations = self.mapView.annotations
-            annotations.forEach { (annotation) in
-                if annotation.title == context.view.placeName.text {
-                    self.mapView.selectAnnotation(annotation, animated: true)
-                }
-            }
-        })
-        collectionView.provider = provider
+        collectionViewDataSource.data = data
     }
 }
 
@@ -86,6 +79,17 @@ extension MapScreenViewController {
         collectionView.delegate = self
         collectionView.clipsToBounds = false
         collectionView.backgroundColor = .clear
+        placesProvider = PlacesProvider(collectionViewDataSource, tapHandler: { [weak self] context in
+            guard let self = self else { return }
+            let annotations = self.mapView.annotations
+            annotations.forEach { (annotation) in
+                if annotation.title == context.view.placeName.text {
+                    self.mapView.selectAnnotation(annotation, animated: true)
+                }
+            }
+        })
+        collectionView.provider = placesProvider
+        
     }
     
     // MARK: - LongPressGestureRecognizer
@@ -117,11 +121,11 @@ extension MapScreenViewController {
             ConvertCoordToPlacemark.lookUpCurrentLocation(touchCoordinates: touchCoordinate) { address in
                 annotation.title = address
                 annotation.subtitle = "Посмотреть фото"
+                self.mapView.addAnnotation(annotation)
+                self.mapView.selectAnnotation(annotation, animated: true)
+                let circle = MKCircle(center: annotation.coordinate, radius: self.regionRadius)
+                self.mapView.addOverlay(circle)
             }
-            self.mapView.addAnnotation(annotation)
-            self.mapView.selectAnnotation(annotation, animated: true)
-            let circle = MKCircle(center: annotation.coordinate, radius: regionRadius)
-            mapView.addOverlay(circle)
         }
     }
     
@@ -154,9 +158,7 @@ extension MapScreenViewController {
 // MARK: - CLLocationManagerDelegate
 extension MapScreenViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard let coordinate = locationManager.location?.coordinate else { return }
-        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius * 2, longitudinalMeters: regionRadius * 2)
-        mapView.setRegion(coordinateRegion, animated: true)
+        centerMapOnUserLocation()
     }
     private func configureLocationServices() {
         if authorizationStatus == .notDetermined {
@@ -171,17 +173,38 @@ extension MapScreenViewController: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
+    private func centerMapOnUserLocation() {
+        guard let coordinate = locationManager.location?.coordinate else { return }
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    private func searchIsDisplaying(textField: UITextField, isSearching: Bool) {
+        textField.resignFirstResponder()
+        if isSearching {
+            self.removePins()
+            self.performLocalSearch()
+        } else {
+            collectionViewDataSource.data.removeAll()
+            self.removePins()
+            textField.text?.removeAll()
+            centerMapOnUserLocation()
+        }
+    }
+    
 }
 
 // MARK: - UITextFieldDelegate
 extension MapScreenViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.performLocalSearch()
-        self.removePins()
-        //        self.configGestures(isEnabled: false)
+        searchIsDisplaying(textField: textField, isSearching: true)
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        searchIsDisplaying(textField: textField, isSearching: false)
+        return false
+    }
+    
 }
 
 // MARK: - MKMapViewDelegate
@@ -191,7 +214,7 @@ extension MapScreenViewController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         }
-//        MKMarkerAnnotationView(annotation: <#T##MKAnnotation?#>, reuseIdentifier: <#T##String?#>)
+        //        MKMarkerAnnotationView(annotation: <#T##MKAnnotation?#>, reuseIdentifier: <#T##String?#>)
         if annotation is MKPointAnnotation {
             let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "id")
             annotationView.canShowCallout = true

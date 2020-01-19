@@ -35,7 +35,7 @@ class PlacesProvider: BasicProvider<PlacesCell.Data, PlacesCell> {
             viewSource: sourceView,
             sizeSource: sourceSize,
             layout: layout,
-            animator: AnimatedReloadAnimator(),
+            animator: AnimatedReloadAnimator(entryTransform: AnimatedReloadAnimator.fancyEntryTransform),
             tapHandler: tapHandler
         )
     }
