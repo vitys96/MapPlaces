@@ -14,13 +14,44 @@
                     <view key="view" contentMode="scaleToFill" id="Z3h-FP-F3F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OrM-u7-tSu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" backgroundImage="UIImage()" translatesAutoresizingMaskIntoConstraints="NO" id="ObB-JE-Hzx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="hQ9-ZE-P5D"/>
+                        <constraints>
+                            <constraint firstItem="OrM-u7-tSu" firstAttribute="top" secondItem="Z3h-FP-F3F" secondAttribute="top" id="ChY-N5-QiK"/>
+                            <constraint firstItem="OrM-u7-tSu" firstAttribute="leading" secondItem="Z3h-FP-F3F" secondAttribute="leading" id="E7J-ci-41D"/>
+                            <constraint firstItem="ObB-JE-Hzx" firstAttribute="top" secondItem="Ahc-0c-cEc" secondAttribute="top" id="OmE-xE-jga"/>
+                            <constraint firstAttribute="trailing" secondItem="OrM-u7-tSu" secondAttribute="trailing" id="X6g-vJ-ymM"/>
+                            <constraint firstItem="ObB-JE-Hzx" firstAttribute="leading" secondItem="Z3h-FP-F3F" secondAttribute="leading" id="ao1-j1-piq"/>
+                            <constraint firstAttribute="bottom" secondItem="OrM-u7-tSu" secondAttribute="bottom" id="mfh-Q5-8gN"/>
+                            <constraint firstAttribute="trailing" secondItem="ObB-JE-Hzx" secondAttribute="trailing" id="r7p-9T-oOT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ahc-0c-cEc"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="OrM-u7-tSu" id="Sak-5k-omY"/>
+                        <outlet property="searchBar" destination="ObB-JE-Hzx" id="hip-9S-pJb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATd-ux-id8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="52"/>
+            <point key="canvasLocation" x="131.8840579710145" y="51.5625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="UIImage()" width="16" height="16"/>
+    </resources>
 </document>

@@ -15,7 +15,9 @@ import CollectionKit
 class MapScreenViewController: UIViewController {
     // MARK: - Properties
     var presenter: MapScreenPresenterInterface?
-    var mapView = MKMapView()
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var searchTextField = SearchTextField()
     let collectionView = CollectionView()
     private var startingScrollingOffset = CGPoint.zero
@@ -48,7 +50,7 @@ extension MapScreenViewController: MapScreenView {
 extension MapScreenViewController {
     private func configureUI() {
         configureMapView()
-        configureSearch()
+//        configureSearch()
         configureCollectionView()
         configureLocationServices()
     }
@@ -57,8 +59,9 @@ extension MapScreenViewController {
         mapView.showsUserLocation = true
         locationManager.delegate = self
         addDroppablePin()
-        view.addSubview(mapView)
-        mapView.fillSuperview()
+        searchBar.delegate = self
+//        view.addSubview(mapView)
+//        mapView.fillSuperview()
     }
     private func configureSearch() {
         searchTextField.delegate = self
@@ -255,6 +258,12 @@ extension MapScreenViewController: MKMapViewDelegate {
         return renderer
     }
     
+}
+
+extension MapScreenViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.isTranslucent = false
+    }
 }
 
 // MARK: - UIScrollViewDelegate

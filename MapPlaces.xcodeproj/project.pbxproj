@@ -46,6 +46,13 @@
 		EFA0C20423BB997400B62E73 /* PlacePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20323BB997400B62E73 /* PlacePin.swift */; };
 		EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0C20523BBA49300B62E73 /* TapticEngine.swift */; };
 		EFC53A6A23D44C3F00CA5B80 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A6923D44C3F00CA5B80 /* Utils.swift */; };
+		EFC53A7323D451C900CA5B80 /* Photos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC53A6C23D451C900CA5B80 /* Photos.storyboard */; };
+		EFC53A7423D451C900CA5B80 /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A6D23D451C900CA5B80 /* PhotosPresenter.swift */; };
+		EFC53A7523D451C900CA5B80 /* PhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A6E23D451C900CA5B80 /* PhotosRouter.swift */; };
+		EFC53A7623D451C900CA5B80 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A6F23D451C900CA5B80 /* PhotosViewController.swift */; };
+		EFC53A7723D451C900CA5B80 /* PhotosProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A7023D451C900CA5B80 /* PhotosProtocols.swift */; };
+		EFC53A7823D451C900CA5B80 /* PhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A7123D451C900CA5B80 /* PhotosInteractor.swift */; };
+		EFC53A7923D451C900CA5B80 /* PhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC53A7223D451C900CA5B80 /* PhotosConfigurator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +98,13 @@
 		EFA0C20323BB997400B62E73 /* PlacePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePin.swift; sourceTree = "<group>"; };
 		EFA0C20523BBA49300B62E73 /* TapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapticEngine.swift; sourceTree = "<group>"; };
 		EFC53A6923D44C3F00CA5B80 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		EFC53A6C23D451C900CA5B80 /* Photos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Photos.storyboard; sourceTree = "<group>"; };
+		EFC53A6D23D451C900CA5B80 /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
+		EFC53A6E23D451C900CA5B80 /* PhotosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRouter.swift; sourceTree = "<group>"; };
+		EFC53A6F23D451C900CA5B80 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		EFC53A7023D451C900CA5B80 /* PhotosProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosProtocols.swift; sourceTree = "<group>"; };
+		EFC53A7123D451C900CA5B80 /* PhotosInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosInteractor.swift; sourceTree = "<group>"; };
+		EFC53A7223D451C900CA5B80 /* PhotosConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosConfigurator.swift; sourceTree = "<group>"; };
 		F0D801E8AE96B4DC6D588E45 /* Pods_MapPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -195,6 +209,7 @@
 		EF75CBC223B64DD60070AEA3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EFC53A6B23D4515600CA5B80 /* Photos */,
 				EF75CBC123B64DD00070AEA3 /* Map */,
 			);
 			path = Modules;
@@ -257,6 +272,20 @@
 				EF98579B23B3C90400D99986 /* Info.plist */,
 			);
 			path = MapPlaces;
+			sourceTree = "<group>";
+		};
+		EFC53A6B23D4515600CA5B80 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				EFC53A6C23D451C900CA5B80 /* Photos.storyboard */,
+				EFC53A6D23D451C900CA5B80 /* PhotosPresenter.swift */,
+				EFC53A6E23D451C900CA5B80 /* PhotosRouter.swift */,
+				EFC53A6F23D451C900CA5B80 /* PhotosViewController.swift */,
+				EFC53A7023D451C900CA5B80 /* PhotosProtocols.swift */,
+				EFC53A7123D451C900CA5B80 /* PhotosInteractor.swift */,
+				EFC53A7223D451C900CA5B80 /* PhotosConfigurator.swift */,
+			);
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		FAB342AA972B575E553D4CD0 /* Frameworks */ = {
@@ -329,6 +358,7 @@
 			files = (
 				EF98579A23B3C90400D99986 /* LaunchScreen.storyboard in Resources */,
 				EF75CBBA23B64DB00070AEA3 /* MapScreen.storyboard in Resources */,
+				EFC53A7323D451C900CA5B80 /* Photos.storyboard in Resources */,
 				EF98579723B3C90400D99986 /* Assets.xcassets in Resources */,
 				EF6655C523B761BD00A1F96D /* PlacesCell.xib in Resources */,
 			);
@@ -394,6 +424,7 @@
 				EF6655C323B761A900A1F96D /* PlacesCell.swift in Sources */,
 				EFC53A6A23D44C3F00CA5B80 /* Utils.swift in Sources */,
 				EFA0C20623BBA49300B62E73 /* TapticEngine.swift in Sources */,
+				EFC53A7523D451C900CA5B80 /* PhotosRouter.swift in Sources */,
 				EF6655C123B7617900A1F96D /* PlacesProvider.swift in Sources */,
 				EF6655D423B909CA00A1F96D /* Extension + UIColor.swift in Sources */,
 				EF6655D223B906F700A1F96D /* Extension + CALayer.swift in Sources */,
@@ -401,10 +432,12 @@
 				EF98578E23B3C90300D99986 /* AppDelegate.swift in Sources */,
 				EF75CBBF23B64DB00070AEA3 /* MapScreenInteractor.swift in Sources */,
 				EF75CBAF23B64C1E0070AEA3 /* UIView + Anchors.swift in Sources */,
+				EFC53A7923D451C900CA5B80 /* PhotosConfigurator.swift in Sources */,
 				EF75CBBB23B64DB00070AEA3 /* MapScreenPresenter.swift in Sources */,
 				EF98579023B3C90300D99986 /* SceneDelegate.swift in Sources */,
 				EFA0C20423BB997400B62E73 /* PlacePin.swift in Sources */,
 				EF75CBAB23B64C1E0070AEA3 /* Extension + TableDirector.swift in Sources */,
+				EFC53A7823D451C900CA5B80 /* PhotosInteractor.swift in Sources */,
 				EF75CBAA23B64C1E0070AEA3 /* Extension + ViewController.swift in Sources */,
 				EF6655CB23B7943600A1F96D /* CollectionCell.swift in Sources */,
 				EF6655D023B799A300A1F96D /* MKMapItem+Address.swift in Sources */,
@@ -416,6 +449,9 @@
 				EF75CBAC23B64C1E0070AEA3 /* UITableView + TableFlip.swift in Sources */,
 				EF75CBBD23B64DB00070AEA3 /* MapScreenViewController.swift in Sources */,
 				EF75CBC023B64DB00070AEA3 /* MapScreenConfigurator.swift in Sources */,
+				EFC53A7723D451C900CA5B80 /* PhotosProtocols.swift in Sources */,
+				EFC53A7423D451C900CA5B80 /* PhotosPresenter.swift in Sources */,
+				EFC53A7623D451C900CA5B80 /* PhotosViewController.swift in Sources */,
 				EF75CBBE23B64DB00070AEA3 /* MapScreenProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
